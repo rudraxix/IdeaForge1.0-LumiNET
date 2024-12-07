@@ -1,0 +1,29 @@
+{
+    "manifest_version":2,
+    "name":"still_in_progress",
+    "version": "1.0",
+    "description": "A browser extension for assisting visually impaired users with web-browsing",
+    "background": {
+        "scripts":["background.js"],
+        "persistent":false
+    },
+    "icons": {
+        "48":"iconpacks/icon-1(48).png",
+        "64":"iconpacks/icon-2(64).png"
+    },
+    "permissions":["activeTab", "storage", "tabs"],
+    "browser_action":{
+        "default_popup": "popup.html",
+        "default_icon": {
+            "48":"iconpacks/icon-1.png(48)",
+            "64":"iconpacks/icon-2(64).png"
+        }
+    },
+    "content_scripts":[
+        {
+            "matches":["all_urls"],
+            "js": ["content.js"]
+        }
+    ]
+
+}
