@@ -18,7 +18,7 @@ Follow these steps to install and use the extension.
 ### Installation
 1. Clone the repository:
     ```bash
-    git clone https://github.com/username/project-name.git
+    git clone https://github.com/rudraxix/IdeaForge1.0-LumiNET.git
     ```
 2. Open Mozilla Firefox and navigate to `about:debugging`.
 3. Click on `This Firefox` and select `Load Temporary Add-on`.
