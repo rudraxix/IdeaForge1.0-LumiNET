@@ -1,33 +1,38 @@
-document.getElementById('Page Simplification').addEventListener('click', function() {
+document.getElementById('PageSimplification').addEventListener('click', function() {
     browser.tabs.query({
         active: true,
         currentWindow: true
     }).then(function(tabs) {
         // Apply page simplification logic
         browser.tabs.executeScript(tabs[0].id, {
-            code: 'document.body.style.filter = "contrast(1.5) brightness(1.1)"; document.body.style.backgroundColor = "black"; document.body.style.fontSize = "larger"; Array.from(document.querySelectorAll("*")).forEach(element => {if (getComputedStyle(element).position === "fixed") {element.style.display = "none";}});'
+            file:'js/PageSimplification.js',
         });
+        console.log("Page Simplifaction Activated");
     });
 });
 
-document.getElementById("Voicecontrol").addEventListener("click", function() {
+document.getElementById("VoiceControl").addEventListener("click", function() {
     browser.tabs.query({
         active: true,
         currentWindow: true
     }).then(function(tabs) {
-        // Implement voice control logic
-        // Placeholder action for now
+        // Implementation of the voice control logic
+        browser.tabs.executeScript(tabs[0].id,{
+            file:'js/VoiceControl.js',
+        });
         console.log("Voice Control Activated");
     });
 });
 
-document.getElementById("visualnarration").addEventListener("click", function() {
+document.getElementById("VisualNarration").addEventListener("click", function() {
     browser.tabs.query({
         active: true,
         currentWindow: true
     }).then(function(tabs) {
-        // Implement visual narration logic
-        // Placeholder action for now
+        // Implementation of the visual narration logic
+        browser.tabs.executeScript(tabs[0].id,{
+            file:'js/VisualNarration.js',
+        });
         console.log("Visual Narration Activated");
     });
 });
