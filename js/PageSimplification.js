@@ -1,82 +1,57 @@
-// Define three font size scaling factors for toggling
-let fontSizes = [1.2, 1.5, 2]; // Scaling factors (1.2 = 120%, etc.)
-let currentFontSizeIndex = 0;  // Tracks the current font size multiplier
+// Define scaling factors for font sizes
+let fontSizes = [1.5, 2, 3]; // Scale factors for visually challenged users
+let currentFontSizeIndex = 0; // Track current font size scale
+let originalFontSizes = new Map(); // Store original font sizes for toggling
 
-// Function to remove unnecessary elements like ads and banners
+// Function to remove unnecessary elements
 function removeUnnecessaryElements() {
-    const elementsToRemove = document.querySelectorAll(
-        'iframe, .ad, .advertisement, .sidebar, .popup, .banner, .footer, .header, .nav'
-    );
-    elementsToRemove.forEach(element => element.style.display = 'none');
+    const ads = document.querySelectorAll('iframe, .ad, .advertisement, .sidebar, .popup, .banner, .footer, .header, .nav');
+    ads.forEach(ad => ad.style.display = 'none');
 }
 
-// Function to adjust font sizes dynamically while preserving formatting
-function adjustFontSize() {
+// Function to toggle font size
+function changeFontSize() {
     const textElements = document.querySelectorAll("body, p, h1, h2, h3, h4, h5, h6, span, div, a");
 
     textElements.forEach(element => {
-        // Compute the current font size
-        const computedStyle = window.getComputedStyle(element);
-        const currentFontSize = parseFloat(computedStyle.fontSize);
-        const currentLineHeight = parseFloat(computedStyle.lineHeight);
+        // Get the original font size if not already stored
+        if (!originalFontSizes.has(element)) {
+            const currentFontSize = window.getComputedStyle(element).fontSize;
+            originalFontSizes.set(element, parseFloat(currentFontSize));
+        }
 
-        // Scale font size dynamically
-        const newFontSize = currentFontSize * fontSizes[currentFontSizeIndex];
-        const newLineHeight = currentLineHeight * fontSizes[currentFontSizeIndex];
+        // Toggle between original size and scaled sizes
+        const originalSize = originalFontSizes.get(element);
+        const newSize = currentFontSizeIndex === 0
+            ? originalSize // Reset to original size
+            : originalSize * fontSizes[currentFontSizeIndex - 1]; // Scale the font size
 
-        // Preserve visual hierarchy by retaining font-weight and other attributes
-        element.style.fontSize = `${newFontSize}px`;
-        element.style.lineHeight = `${newLineHeight}px`;
-        element.style.color = "#000000"; // Optional: Improve text contrast
+        element.style.fontSize = `${newSize}px`;
     });
 
-    // Update the font size index for toggling
-    currentFontSizeIndex = (currentFontSizeIndex + 1) % fontSizes.length;
+    // Cycle through font sizes
+    currentFontSizeIndex = (currentFontSizeIndex + 1) % (fontSizes.length + 1); // +1 for original size
 }
 
-// Function to improve layout readability
-function adjustLayout() {
-    const body = document.body;
+// Function to improve layout for readability
+function simplifyLayout() {
+    document.body.style.padding = "20px"; // Add padding for readability
+    document.body.style.lineHeight = "1.8"; // Improve line spacing
+    document.body.style.backgroundColor = "#f4f4f4"; // Soft background color for better contrast
+    document.body.style.color = "#000000"; // Black text for maximum contrast
+    document.body.style.fontFamily = "'Arial', sans-serif"; // Use a clear font
 
-    // Add styles to center content and improve readability
-    body.style.maxWidth = "900px"; // Limit page width
-    body.style.margin = "0 auto";  // Center content
-    body.style.padding = "20px";  // Add padding for a better visual experience
-
-    // Improve line spacing for paragraphs and headers
-    const textElements = document.querySelectorAll("p, h1, h2, h3, h4, h5, h6, span, div");
-    textElements.forEach(element => {
-        element.style.lineHeight = "1.6"; // Standard line-height for readability
-    });
-}
-
-// Function to ensure simplified styles adapt dynamically
-function dynamicallyAdaptStyles() {
-    const styleSheet = document.createElement("style");
-    styleSheet.textContent = `
-        body {
-            background-color: #f5f5f5; /* Light background for readability */
-        }
-
-        a {
-            color: #007bff; /* Highlight links for visibility */
-            text-decoration: underline;
-        }
-
-        a:hover {
-            text-decoration: none; /* Subtle hover effect */
-        }
-    `;
-    document.head.appendChild(styleSheet);
+    // Ensure content spans across the screen width without jumbled elements
+    document.body.style.maxWidth = "100%";
+    document.body.style.margin = "0"; // Remove centering that causes empty space
 }
 
 // Main function to simplify the page
 function simplifyPage() {
-    removeUnnecessaryElements(); // Hide unwanted elements
-    adjustFontSize(); // Scale font sizes dynamically
-    adjustLayout(); // Improve layout readability
-    dynamicallyAdaptStyles(); // Ensure adaptable styling
+    removeUnnecessaryElements();
+    changeFontSize();
+    simplifyLayout();
 }
 
-// Execute page simplification
+// Execute the script
 simplifyPage();
