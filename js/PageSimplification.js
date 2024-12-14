@@ -1,17 +1,7 @@
 // Function to remove unnecessary elements like ads, popups, banners, sidebars, etc.
 function removeUnnecessaryElements() {
     const elementsToRemove = [
-        'iframe',        // Remove all iframes (often used for ads)
-        '.ad',           // Remove elements with class 'ad'
-        '.advertisement',// Remove elements with class 'advertisement'
-        '.sidebar',      // Remove sidebars
-        '.popup',        // Remove popups
-        '.banner',       // Remove banners
-        '.footer',       // Remove footer
-        '.header',       // Remove header
-        '.nav',          // Remove navigation
-        '.sticky',       // Remove sticky elements
-        '.modal'         // Remove modals
+        'iframe', '.ad', '.advertisement', '.sidebar', '.popup', '.banner', '.footer', '.header', '.nav', '.sticky', '.modal'
     ];
 
     elementsToRemove.forEach(selector => {
@@ -29,7 +19,7 @@ function increaseFontSize() {
     textElements.forEach(element => {
         // Increase the font size slightly (no zooming)
         const currentFontSize = parseFloat(window.getComputedStyle(element).fontSize);
-        const newFontSize = currentFontSize * 1.4; // Increase font size by 40%
+        const newFontSize = currentFontSize * 1.3; // Increase font size by 0.3
         const newLineHeight = currentFontSize * 1.5; // Adjust line height for readability
 
         // Apply the new font size and line height
@@ -45,16 +35,29 @@ function increaseFontSize() {
 function cleanLayout() {
     const body = document.body;
 
+    // Apply Flexbox to the body to make the content flexible and centered
+    body.style.display = 'flex';
+    body.style.flexDirection = 'column';
+    body.style.alignItems = 'center';    // Center content horizontally
+    body.style.justifyContent = 'flex-start'; // Align content to the top
+    body.style.margin = '0';
+    body.style.padding = '0';
+
     // Apply a max-width to make sure the content isn't stretched too wide
-    body.style.maxWidth = "800px";  // Limit page width to 800px for better readability
-    body.style.margin = "0 auto";   // Center the content horizontally
-    body.style.padding = "20px";    // Add padding around the content
+    const contentContainer = document.createElement('div');
+    contentContainer.style.width = '100%';     // Ensure content takes up the full width
+    contentContainer.style.maxWidth = '1200px'; // Set a maximum width for readability
+    contentContainer.style.padding = '20px';
+    contentContainer.style.boxSizing = 'border-box';
+
+    // Add content to the container
+    body.appendChild(contentContainer);
 
     // Clean up the layout by adjusting padding for paragraphs and headers
     const textElements = document.querySelectorAll("p, h1, h2, h3, h4, h5, h6, span, div");
     textElements.forEach(element => {
         element.style.marginBottom = "15px"; // Add some space between elements
-        element.style.lineHeight = "1.8";    // Increase line height for better readability
+        element.style.lineHeight = "1.5";    // Increase line height for better readability
     });
 }
 
