@@ -10,33 +10,48 @@ function startNarration() {
         narrateText("The main heading is: " + mainHeading.innerText);
     }
 
-    // Narrate all images on the page
-    const images = document.querySelectorAll("img");
-    if (images.length > 0) {
-        narrateText("This page contains the following images:");
-        images.forEach(image => {
-            const altText = image.alt || "An image with no description";
-            narrateText("Image: " + altText);
-        });
+    // Gather all the content elements (text and images)
+    const contentElements = [];
+
+    // Get all text elements (headings, paragraphs, links)
+    const textElements = [
+        ...document.querySelectorAll("h1, h2, h3, h4, h5, h6, p, a")
+    ];
+
+    // Get all images
+    const images = [...document.querySelectorAll("img")];
+
+    // Merge the images and text elements into one array and keep their order intact
+    let allElements = [];
+    let imageIndex = 0;
+    let textIndex = 0;
+
+    while (imageIndex < images.length || textIndex < textElements.length) {
+        if (textIndex < textElements.length) {
+            allElements.push({ type: 'text', text: textElements[textIndex].innerText });
+            textIndex++;
+        }
+
+        if (imageIndex < images.length) {
+            const altText = images[imageIndex].alt || "An image with no description";
+            allElements.push({ type: 'image', text: "Image: " + altText });
+            imageIndex++;
+        }
     }
 
-    // Narrate all paragraphs
-    const paragraphs = document.querySelectorAll("p");
-    if (paragraphs.length > 0) {
-        narrateText("The page contains the following paragraphs:");
-        paragraphs.forEach(paragraph => {
-            narrateText(paragraph.innerText);
-        });
-    }
+    // Narrate all content in order
+    narrateContentInOrder(allElements);
+}
 
-    // Narrate any other visual content, like links or buttons
-    const links = document.querySelectorAll("a");
-    if (links.length > 0) {
-        narrateText("The page contains the following links:");
-        links.forEach(link => {
-            narrateText("Link: " + link.innerText);
-        });
-    }
+// Function to narrate content in order
+function narrateContentInOrder(contentElements) {
+    contentElements.forEach(item => {
+        if (item.type === 'text') {
+            narrateText(item.text); // Narrate text content (headings, paragraphs, links)
+        } else if (item.type === 'image') {
+            narrateText(item.text); // Narrate image descriptions
+        }
+    });
 }
 
 // Function to narrate text using the SpeechSynthesis API
