@@ -10,33 +10,23 @@ function startNarration() {
         narrateText("The main heading is: " + mainHeading.innerText);
     }
 
-    // Narrate all images on the page
-    const images = document.querySelectorAll("img");
-    if (images.length > 0) {
-        narrateText("This page contains the following images:");
-        images.forEach(image => {
-            const altText = image.alt || "An image with no description";
-            narrateText("Image: " + altText);
-        });
-    }
+    // Gather all the main content elements (text)
+    const contentElements = [
+        ...document.querySelectorAll("h1, h2, h3, h4, h5, h6, p, a")
+    ];
 
-    // Narrate all paragraphs
-    const paragraphs = document.querySelectorAll("p");
-    if (paragraphs.length > 0) {
-        narrateText("The page contains the following paragraphs:");
-        paragraphs.forEach(paragraph => {
-            narrateText(paragraph.innerText);
-        });
-    }
+    // Narrate all content (headings, paragraphs, links) in order
+    narrateContentInOrder(contentElements);
+}
 
-    // Narrate any other visual content, like links or buttons
-    const links = document.querySelectorAll("a");
-    if (links.length > 0) {
-        narrateText("The page contains the following links:");
-        links.forEach(link => {
-            narrateText("Link: " + link.innerText);
-        });
-    }
+// Function to narrate content in order
+function narrateContentInOrder(contentElements) {
+    contentElements.forEach(element => {
+        const text = element.innerText || element.textContent;
+        if (text.trim()) { // Only narrate non-empty text
+            narrateText(text); // Narrate text content (headings, paragraphs, links)
+        }
+    });
 }
 
 // Function to narrate text using the SpeechSynthesis API
