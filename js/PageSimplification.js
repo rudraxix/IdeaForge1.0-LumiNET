@@ -1,4 +1,3 @@
-// Function to remove unnecessary elements like ads, popups, banners, sidebars, etc.
 function removeUnnecessaryElements() {
     const elementsToRemove = [
         'iframe', '.ad', '.advertisement', '.sidebar', '.popup', '.banner', '.footer', '.header', '.nav', '.sticky', '.modal'
@@ -12,7 +11,6 @@ function removeUnnecessaryElements() {
     });
 }
 
-// Function to increase text size for readability
 function increaseFontSize() {
     const textElements = document.querySelectorAll("body, p, h1, h2, h3, h4, h5, h6, span, div, a");
 
@@ -31,7 +29,6 @@ function increaseFontSize() {
     });
 }
 
-// Function to clean up the page layout (limit width, center content)
 function cleanLayout() {
     const body = document.body;
 
@@ -45,27 +42,25 @@ function cleanLayout() {
 
     // Apply a max-width to make sure the content isn't stretched too wide
     const contentContainer = document.createElement('div');
-    contentContainer.style.width = '100%';     // Ensure content takes up the full width
-    contentContainer.style.maxWidth = '1200px'; // Set a maximum width for readability
+    contentContainer.style.width = '100%';     
+    contentContainer.style.maxWidth = '1200px'; 
     contentContainer.style.padding = '20px';
     contentContainer.style.boxSizing = 'border-box';
 
-    // Add content to the container
     body.appendChild(contentContainer);
 
     // Clean up the layout by adjusting padding for paragraphs and headers
     const textElements = document.querySelectorAll("p, h1, h2, h3, h4, h5, h6, span, div");
     textElements.forEach(element => {
-        element.style.marginBottom = "15px"; // Add some space between elements
-        element.style.lineHeight = "1.5";    // Increase line height for better readability
+        element.style.marginBottom = "15px"; 
+        element.style.lineHeight = "1.5";    
     });
 }
 
-// Main function to simplify the page into a reader-friendly format
 function simplifyPage() {
-    removeUnnecessaryElements();  // Remove distracting elements (ads, banners, etc.)
-    increaseFontSize();           // Increase font size for readability
-    cleanLayout();                // Clean up layout for easy reading
+    removeUnnecessaryElements();
+    increaseFontSize();           
+    cleanLayout();                
 }
 
 // Execute page simplification
