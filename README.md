@@ -5,7 +5,7 @@ LumiNET is designed to assist visually impaired users in navigating and consumin
 
 ## Features
 - **Page Simplification**: Adjusts font size, contrast, and simplifies webpage elements for better readability.
-- **Voice-Enabled Control**: Navigate web pages using voice commands.
+- **Voice-Enabled Control**: Navigate web pages using voice commands such as scrolling, navigating to the top or bottom, and starting/stopping narration.
 - **Visual Narration**: Provides text-to-speech narration for images and text content.
 
 ## Getting Started
@@ -28,9 +28,9 @@ Follow these steps to install and use the extension.
 ## Usage
 - Click on the extension icon in the toolbar to open the popup.
 - Use the buttons for the following:
-  - **Page Simplification**: Adjusts the font size, contrast, and background.
-  - **Voice-Enabled Control**: Activate voice commands.
-  - **Visual Narration**: Start the narration for content on the page.
+    - **Page Simplification**: Adjusts the font size, contrast, and background for better readability.
+    - **Voice-Enabled Control**: Activate voice commands for actions like scrolling and starting/stopping narration.
+    - **Visual Narration**: Start the narration for content on the page, which will be read aloud using text-to-speech.
 
 ## Contributing
 Contributions are welcome! Follow these steps to contribute:
@@ -56,3 +56,5 @@ Distributed under the MIT License. See `LICENSE` for more information.
 - Mozilla Developer Network (MDN) for excellent documentation.
 - Accessibility guidelines from W3C.
 - [Text-to-Speech JS Library](https://github.com/mdn/speech-synthesis).
+- [Annyang Speech Recognition Library](https://github.com/TalAter/annyang) for enabling voice commands.
+

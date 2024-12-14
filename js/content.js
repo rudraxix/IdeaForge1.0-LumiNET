@@ -8,7 +8,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     } else if (request.action === "voiceControl") {
         importScript("VoiceControl.js");
     } else if (request.action === "stopNarration") {
-        stopNarration(); // Call the stopNarration function if requested
+        stopNarration(); // Stop narration if requested
     }
 });
 
@@ -19,9 +19,8 @@ function importScript(scriptName) {
 }
 
 function stopNarration() {
-    // Ensure the stopNarration function is available from the injected VisualNarration script
     if (typeof window.stopNarration === 'function') {
-        window.stopNarration(); // Call stopNarration if it's defined in the injected script
+        window.stopNarration(); // Call the stopNarration function if it's defined in the injected script
         console.log("Narration stopped");
     } else {
         console.log("No narration function found.");

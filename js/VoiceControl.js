@@ -96,8 +96,5 @@ function stopNarration() {
     }
 }
 
-// Initialize voice control when the page loads
-window.onload = function () {
-    initializeVoiceControl(); // Start listening for voice commands
-    startDynamicHoverNarration(); // Start narration on page load
-};
+// Initialize voice control and start narration
+initializeVoiceControl();
