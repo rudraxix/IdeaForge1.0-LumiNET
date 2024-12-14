@@ -11,7 +11,7 @@
         "48":"iconpacks/icon-1(48).png",
         "64":"iconpacks/icon-2(64).png"
     },
-    "permissions":["activeTab", "storage", "tabs"],
+    "permissions":["activeTab", "storage", "tabs", "https://cdnjs.cloudflare.com/"],
     "browser_action":{
         "default_popup": "popup.html",
         "default_icon": {
