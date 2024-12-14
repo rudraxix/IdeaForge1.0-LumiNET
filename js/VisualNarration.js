@@ -1,31 +1,14 @@
-// Function to start narration
-function startNarration() {
-    // First, narrate the page title
-    const pageTitle = document.title || "No title available";
-    narrateText("This page is titled: " + pageTitle);
+// Function to start the narration when mouse hovers over an element
+function startHoverNarration() {
+    // Select all text elements like headings, paragraphs, and links
+    const textElements = document.querySelectorAll("h1, h2, h3, h4, h5, h6, p, a");
 
-    // Narrate the main heading (if available)
-    const mainHeading = document.querySelector("h1");
-    if (mainHeading) {
-        narrateText("The main heading is: " + mainHeading.innerText);
-    }
-
-    // Gather all the main content elements (text)
-    const contentElements = [
-        ...document.querySelectorAll("h1, h2, h3, h4, h5, h6, p, a")
-    ];
-
-    // Narrate all content (headings, paragraphs, links) in order
-    narrateContentInOrder(contentElements);
-}
-
-// Function to narrate content in order
-function narrateContentInOrder(contentElements) {
-    contentElements.forEach(element => {
-        const text = element.innerText || element.textContent;
-        if (text.trim()) { // Only narrate non-empty text
-            narrateText(text); // Narrate text content (headings, paragraphs, links)
-        }
+    // Add mouseover event listener to each element
+    textElements.forEach(element => {
+        element.addEventListener("mouseover", function() {
+            const text = element.innerText || element.textContent;
+            narrateText(text); // Narrate the text of the hovered element
+        });
     });
 }
 
@@ -41,5 +24,5 @@ function narrateText(text) {
     speechSynthesis.speak(utterance);
 }
 
-// Execute the narration when the script is run
-startNarration();
+// Start the hover narration when the script is run
+startHoverNarration();
